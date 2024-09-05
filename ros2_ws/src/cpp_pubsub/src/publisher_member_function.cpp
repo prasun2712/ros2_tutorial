@@ -8,6 +8,7 @@
 
 using namespace std::chrono_literals;
 
+// The node class MinimalPublisher is created by inheriting from rclcpp::Node
 class MinimalPublisher : public rclcpp::Node
 {
 public:
@@ -20,6 +21,7 @@ public:
     }
 
 private:
+    // The timer_callback function is where the message data is set and the messages are actually published.
     void timer_callback()
     {
         auto message = std_msgs::msg::String();
@@ -35,6 +37,7 @@ private:
 int main(int argc, char *argv[])
 {
     rclcpp::init(argc, argv);
+    // rclcpp::spin starts processing data from the node, including callbacks from the timer.
     rclcpp::spin(std::make_shared<MinimalPublisher>());
     rclcpp::shutdown();
     return 0;

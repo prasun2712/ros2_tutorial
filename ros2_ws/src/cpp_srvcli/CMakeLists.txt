@@ -13,8 +13,12 @@ find_package(example_interfaces REQUIRED)
 add_executable(cpp_server src/add_two_ints_server.cpp)
 ament_target_dependencies(cpp_server rclcpp example_interfaces)
 
+add_executable(client src/add_two_ints_client.cpp)
+ament_target_dependencies(client rclcpp example_interfaces)
+
 install(TARGETS
     cpp_server
+    client
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

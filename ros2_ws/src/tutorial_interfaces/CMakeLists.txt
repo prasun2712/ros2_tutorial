@@ -24,15 +24,23 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(tutorial_interfaces REQUIRED)
 
+# Executable for publisher
 add_executable(talker src/publisher_member_function.cpp)
 ament_target_dependencies(talker rclcpp tutorial_interfaces)
 
+# Executable for subscriber
 add_executable(listener src/subscriber_member_function.cpp)
 ament_target_dependencies(listener rclcpp tutorial_interfaces)
+
+# Executable for server
+add_executable(server src/add_three_ints_server.cpp)
+ament_target_dependencies(server
+  rclcpp tutorial_interfaces) 
 
 install(TARGETS
   talker
   listener
+  server
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

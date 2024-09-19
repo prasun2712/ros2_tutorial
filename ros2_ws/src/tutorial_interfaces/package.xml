@@ -3,7 +3,7 @@
 <package format="3">
   <name>tutorial_interfaces</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>This package contains custom interfaces and code using the interfaces.</description>
   <maintainer email="prasun.ieee@gmail.com">prasun</maintainer>
   <license>Apache License 2.0</license>
 
@@ -13,6 +13,7 @@
   <test_depend>ament_lint_common</test_depend>
 
   <depend>geometry_msgs</depend>
+  <depend>more_interfaces</depend>
   <buildtool_depend>rosidl_default_generators</buildtool_depend>
   <exec_depend>rosidl_default_runtime</exec_depend>
   <member_of_group>rosidl_interface_packages</member_of_group>

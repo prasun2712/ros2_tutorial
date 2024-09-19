@@ -23,30 +23,45 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(tutorial_interfaces REQUIRED)
+find_package(more_interfaces REQUIRED)
 
 # Executable for publisher
 add_executable(talker src/publisher_member_function.cpp)
 ament_target_dependencies(talker rclcpp tutorial_interfaces)
+# In order to use the messages generated in the same package we need to use the following CMake code
+# rosidl_target_interfaces(talker
+#   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 # Executable for subscriber
 add_executable(listener src/subscriber_member_function.cpp)
 ament_target_dependencies(listener rclcpp tutorial_interfaces)
+# rosidl_target_interfaces(listener
+#   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 # Executable for server
 add_executable(server src/add_three_ints_server.cpp)
 ament_target_dependencies(server
-  rclcpp tutorial_interfaces) 
+  rclcpp tutorial_interfaces)
+# rosidl_target_interfaces(server
+#   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 # Executable for client
 add_executable(client src/add_three_ints_client.cpp)
 ament_target_dependencies(client
-  rclcpp tutorial_interfaces) 
+  rclcpp tutorial_interfaces)
+# rosidl_target_interfaces(client
+#   ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
+# Executable for address book publisher.
+add_executable(publish_address_book src/publish_address_book.cpp)
+ament_target_dependencies(publish_address_book rclcpp more_interfaces)
 
 install(TARGETS
   talker
   listener
   server
   client
+  publish_address_book
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

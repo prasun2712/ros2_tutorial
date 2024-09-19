@@ -37,10 +37,16 @@ add_executable(server src/add_three_ints_server.cpp)
 ament_target_dependencies(server
   rclcpp tutorial_interfaces) 
 
+# Executable for client
+add_executable(client src/add_three_ints_client.cpp)
+ament_target_dependencies(client
+  rclcpp tutorial_interfaces) 
+
 install(TARGETS
   talker
   listener
   server
+  client
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

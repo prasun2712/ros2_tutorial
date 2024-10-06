@@ -1,3 +1,6 @@
+# Back in the tutorial_interfaces/srv directory you just created, make a new file called AddThreeInts.srv with the following request and response structure.
+# This is your custom service that requests three integers named a, b, and c, and responds with an integer called sum.
+# Request is written on top and response at bottom separated by "---"
 int64 a
 int64 b
 int64 c

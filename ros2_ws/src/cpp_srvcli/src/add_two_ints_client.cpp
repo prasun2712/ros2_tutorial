@@ -17,18 +17,22 @@ int main(int argc, char **argv)
         return 1;
     }
 
+    // Similar to the service node, the following lines of code create the node and then create the client for that node.
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("add_two_ints_client");
     rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedPtr client =
         node->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
 
+    // Next, the request is created. Its structure is defined by the .srv file mentioned earlier.
     auto request = std::make_shared<example_interfaces::srv::AddTwoInts::Request>();
     request->a = atoll(argv[1]);
     request->b = atoll(argv[2]);
 
+    // The while loop gives the client 1 second to search for service nodes in the network. If it can’t find any, it will continue waiting.
     while (!client->wait_for_service(1s))
     {
         if (!rclcpp::ok())
         {
+            // If the client is canceled (e.g. by you entering Ctrl+C into the terminal), it will return an error log message stating it was interrupted.
             RCLCPP_ERROR(rclcpp::get_logger("rclcpp"), "Interrupted while waiting for the service. Exiting.");
             return 0;
         }
@@ -36,7 +40,7 @@ int main(int argc, char **argv)
     }
 
     auto result = client->async_send_request(request);
-    // Wait for the result.
+    // Wait for the result. Then the client sends its request, and the node spins until it receives its response, or fails.
     if (rclcpp::spin_until_future_complete(node, result) ==
         rclcpp::FutureReturnCode::SUCCESS)
     {

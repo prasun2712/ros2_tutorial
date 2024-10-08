@@ -20,6 +20,10 @@ from std_msgs.msg import String
 
 class MinimalSubscriber(Node):
 
+    # The constructor creates a subscriber with the same arguments as the publisher. Recall from the topics tutorial that the topic name and 
+    # message type used by the publisher and subscriber must match to allow them to communicate.
+    # The subscriber’s constructor and callback don’t include any timer definition, because it doesn’t need one. 
+    # Its callback gets called as soon as it receives a message.
     def __init__(self):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
@@ -29,6 +33,8 @@ class MinimalSubscriber(Node):
             10)
         self.subscription  # prevent unused variable warning
 
+    # The callback definition simply prints an info message to the console, along with the data it received. 
+    # Recall that the publisher defines msg.data = 'Hello World: %d' % self.i
     def listener_callback(self, msg):
         self.get_logger().info('I heard: "%s"' % msg.data)
 
@@ -36,6 +42,7 @@ class MinimalSubscriber(Node):
 def main(args=None):
     rclpy.init(args=args)
 
+    # The main definition is almost exactly the same, replacing the creation and spinning of the publisher with the subscriber.
     minimal_subscriber = MinimalSubscriber()
 
     rclpy.spin(minimal_subscriber)

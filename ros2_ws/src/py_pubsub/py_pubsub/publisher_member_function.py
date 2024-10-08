@@ -12,14 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# The first lines of code after the comments import rclpy so its Node class can be used.
 import rclpy
 from rclpy.node import Node
 
+# The next statement imports the built-in string message type that the node uses to structure the data that it passes on the topic.
 from std_msgs.msg import String
 
-
+# Next, the MinimalPublisher class is created, which inherits from (or is a subclass of) Node.
 class MinimalPublisher(Node):
 
+    # Following is the definition of the class’s constructor. super().__init__ calls the Node class’s constructor and gives it your node name, 
+    # in this case minimal_publisher. 
+    # create_publisher declares that the node publishes messages of type String (imported from the std_msgs.msg module), 
+    # over a topic named topic, and that the “queue size” is 10. 
+    # Queue size is a required QoS (quality of service) setting that limits the amount of queued messages if a subscriber is not receiving them fast enough.
+    # Next, a timer is created with a callback to execute every 0.5 seconds. self.i is a counter used in the callback.
     def __init__(self):
         super().__init__('minimal_publisher')
         self.publisher_ = self.create_publisher(String, 'topic', 10)
@@ -27,6 +35,7 @@ class MinimalPublisher(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0
 
+    # timer_callback creates a message with the counter value appended, and publishes it to the console with get_logger().info.
     def timer_callback(self):
         msg = String()
         msg.data = 'Hello World: %d' % self.i
@@ -36,6 +45,7 @@ class MinimalPublisher(Node):
 
 
 def main(args=None):
+    # First the rclpy library is initialized, then the node is created, and then it “spins” the node so its callbacks are called.
     rclpy.init(args=args)
 
     minimal_publisher = MinimalPublisher()

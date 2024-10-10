@@ -10,7 +10,14 @@ class MinimalParam(rclpy.node.Node):
     def __init__(self):
         super().__init__('minimal_param_node')
 
-        self.declare_parameter('my_parameter', 'world')
+        # Optionally, you can set a descriptor for the parameter. Descriptors allow you to specify a text description of the parameter and its constraints, 
+        # like making it read-only, specifying a range, etc. For that to work, the __init__ code has to be changed to:
+        # 
+        # The rest of the code remains the same. Once you run the node, 
+        # you can then run ros2 param describe /minimal_param_node my_parameter to see the type and description.
+        from rcl_interfaces.msg import ParameterDescriptor
+        my_parameter_descriptor = ParameterDescriptor(description='This parameter is my custom parameter!')
+        self.declare_parameter('my_parameter', 'world', my_parameter_descriptor)
 
         self.timer = self.create_timer(1, self.timer_callback)
 

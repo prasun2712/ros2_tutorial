@@ -1,14 +1,11 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>cpp_pubsub</name>
+  <name>my_package</name>
   <version>0.0.0</version>
-  <description>ROS2 cpp publisher subscriber package.</description>
+  <description>Beginner client libraries tutorials practice package.</description>
   <maintainer email="prasun.ieee@gmail.com">prasun</maintainer>
-  <license>Apache License 2.0</license>
-
-  <depend>rclcpp</depend>
-  <depend>std_msgs</depend>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

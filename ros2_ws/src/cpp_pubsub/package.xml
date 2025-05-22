@@ -3,7 +3,7 @@
 <package format="3">
   <name>cpp_pubsub</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Examples of minimal publisher/subscriber using rclcpp</description>
   <maintainer email="prasun.ieee@gmail.com">prasun</maintainer>
   <license>Apache-2.0</license>
 
@@ -14,5 +14,7 @@
 
   <export>
     <build_type>ament_cmake</build_type>
+    <depend>rclcpp</depend>
+    <depend>std_msgs</depend>
   </export>
 </package>
